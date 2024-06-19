@@ -10,7 +10,7 @@ import java.util.List;
 
 @Repository
 public interface HistorialRepository extends JpaRepository<HistorialEntity, Integer> {
-    void update(HistorialEntity historial);
+
 
     List<HistorialEntity> findAllByPatente(String patente);
 

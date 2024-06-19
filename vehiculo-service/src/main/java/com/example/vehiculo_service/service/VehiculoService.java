@@ -31,9 +31,6 @@ public class VehiculoService {
     }
 
     //actualizar Kilometraje
-    public Vehiculo actualizar (Vehiculo vehiculo){
-        return vehiculoRepository.update(vehiculo);
 
-    }
 
 }

@@ -33,4 +33,14 @@ public class DetalleService {
         return listaPyF;
     }
 
+    //Monto total de las reparaciones
+    public Double montoTotal(String patente, LocalDate ingreso){
+        List<DetalleEntity> totalReparaciones = detalleRepository.findAllByPatenteAndFechaI(patente,ingreso);
+        Double total = 0.0;
+        for (DetalleEntity elemento : totalReparaciones) {
+            total = total + elemento.getMonto();
+        }
+        return total;
+    }
+
 }

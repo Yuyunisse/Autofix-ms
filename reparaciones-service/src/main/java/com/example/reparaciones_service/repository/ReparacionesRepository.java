@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ReparacionesRepository extends JpaRepository <Reparaciones, Integer> {
-    void update(Reparaciones reparacion);
+
 }

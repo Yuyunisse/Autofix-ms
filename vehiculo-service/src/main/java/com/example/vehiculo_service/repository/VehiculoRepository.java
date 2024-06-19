@@ -13,5 +13,5 @@ public interface VehiculoRepository extends JpaRepository<Vehiculo, Integer> {
 
     List<Vehiculo> findAll();
 
-    Vehiculo update(Vehiculo vehiculo);
+
 }

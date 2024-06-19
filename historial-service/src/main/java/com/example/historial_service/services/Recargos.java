@@ -22,13 +22,16 @@ public class Recargos {
     DetalleRepository detalleRepository;
 
     @Autowired
+    DetalleService detalleService;
+
+    @Autowired
     HistorialRepository historialRepository;
 
     @Autowired
     RestTemplate restTemplate;
 
-    @Autowired
-    HistorialService historialService;
+   // @Autowired
+    //HistorialService historialService;
 
     //Recargo por kilometraje
     public Double recargoKilometraje(String patente, LocalDate ingreso) {
@@ -36,7 +39,7 @@ public class Recargos {
         Double kilometraje = actual.getKilometraje();
         String tipo = actual.getTipo();
         Double recargo = 0.0;
-        Double total = historialService.montoTotal(patente, ingreso);
+        Double total = detalleService.montoTotal(patente, ingreso);
         if (kilometraje > 0.0) {
             if (kilometraje < 50000) {
                 recargo = 0.0;
@@ -80,7 +83,7 @@ public class Recargos {
         Integer ano_actual = LocalDate.now().getYear();
         Integer antiguedad = ano_actual - ano_fab;
         String tipo = actual.getTipo();
-        Double total = historialService.montoTotal(patente, ingreso);
+        Double total = detalleService.montoTotal(patente, ingreso);
         Double recargo = 0.0;
         if (antiguedad <= 5) {
             recargo = 0.0;
@@ -116,7 +119,7 @@ public class Recargos {
         actual.setHoraD(despachoH);
         LocalDate salida = actual.getFechaS();
         Integer retrasos = Math.toIntExact((DAYS.between(salida, despachoF)));
-        Double total = historialService.montoTotal(patente, ingreso);
+        Double total = detalleService.montoTotal(patente, ingreso);
         Double recargo = total * (retrasos * 0.05);
 
         return recargo;

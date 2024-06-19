@@ -21,23 +21,23 @@ spring:
             allowedMethods: "*"
             allowedHeaders: "*"
       routes:
-        - id: historial-ms
-          uri: lb://historial-ms:8090
+        - id: historial-service
+          uri: lb://historial-service:8090
           predicates:
             - Path=/historial/**
 
-        - id: vehiculo-ms
-          uri: lb://vehiculo-ms:8091
+        - id: vehiculo-service
+          uri: lb://vehiculo-service:8091
           predicates:
             - Path=/vehiculo/**
 
-        - id: reparaciones-ms
-          uri: lb://reparaciones-ms:8093
+        - id: reparaciones-service
+          uri: lb://reparaciones-service:8093
           predicates:
             - Path=/reparaciones/**
             
-        - id: reportes-ms
-          uri: lb://reportes-ms:8094
+        - id: reportes-service
+          uri: lb://reportes-service:8094
           predicates:
             - Path=/reportes/**
         

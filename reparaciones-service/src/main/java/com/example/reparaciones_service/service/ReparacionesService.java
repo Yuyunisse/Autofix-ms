@@ -21,10 +21,6 @@ public class ReparacionesService {
     }
 
     //actualizar reparacion
-    public Reparaciones actualizar(Reparaciones reparacion){
-        reparacionesRepository.update(reparacion);
-        return reparacion;
-    }
 
     //listar todas las reparaciones
     public List<Reparaciones> todo(){

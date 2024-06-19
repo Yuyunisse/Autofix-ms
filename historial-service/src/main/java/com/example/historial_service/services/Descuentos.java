@@ -19,13 +19,16 @@ public class Descuentos {
     DetalleRepository detalleRepository;
 
     @Autowired
+    DetalleService detalleService;
+
+    @Autowired
     HistorialRepository historialRepository;
 
     @Autowired
     RestTemplate restTemplate;
 
-    @Autowired
-    HistorialService historialService;
+   // @Autowired
+    //HistorialService historialService;
 
 
 
@@ -34,7 +37,7 @@ public class Descuentos {
     public Double descuentoCantReparaciones(String patente, LocalDate ingreso){
         List<DetalleEntity> reparaciones = detalleRepository.findAllByPatente(patente);
         Integer cantReparaciones = reparaciones.size();
-        Double total = historialService.montoTotal(patente, ingreso);
+        Double total = detalleService.montoTotal(patente, ingreso);
         Integer contador = 0;
         Double descuento = 0.0;
         vehiculo actual = restTemplate.getForObject("http://vehiculo-service/vehiculo/patente/" + patente, vehiculo.class);
@@ -103,7 +106,7 @@ public class Descuentos {
         String dia = String.valueOf(ingreso.getDayOfWeek());
         Integer hora = Integer.valueOf(actual.getHoraI().getHour());
         Double descuento = 0.0;
-        Double total = historialService.montoTotal(patente,ingreso);
+        Double total = detalleService.montoTotal(patente,ingreso);
         if (dia.toUpperCase().equals("LUNES") || dia.toUpperCase().equals("MONDAY") || dia.toUpperCase().equals("JUEVES") || dia.toUpperCase().equals("THURSDAY")){
             if (hora <= 9 && hora <= 12){
                 descuento = total * 0.10;

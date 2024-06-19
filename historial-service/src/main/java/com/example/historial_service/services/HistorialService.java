@@ -27,6 +27,9 @@ public class HistorialService {
     DetalleRepository detalleRepository;
 
     @Autowired
+    DetalleService detalleService;
+
+    @Autowired
     Recargos recargos;
 
     @Autowired
@@ -45,10 +48,7 @@ public class HistorialService {
     }
 
     //actualizar historial
-    public HistorialEntity actualizar(HistorialEntity historial){
-        historialRepository.update(historial);
-        return historial;
-    }
+
 
     //Listar los historiales de una patente
     public List<HistorialEntity> listarPatente(String patente){
@@ -62,15 +62,7 @@ public class HistorialService {
         return todo;
     }
 
-    //Monto total de las reparaciones
-    public Double montoTotal(String patente, LocalDate ingreso){
-        List<DetalleEntity> totalReparaciones = detalleRepository.findAllByPatenteAndFechaI(patente,ingreso);
-        Double total = 0.0;
-        for (DetalleEntity elemento : totalReparaciones) {
-            total = total + elemento.getMonto();
-        }
-        return total;
-    }
+
 
     //Costo total con los descuentos y recargos
     public Double costoFinal(String patente, LocalDate ingreso){
@@ -90,7 +82,7 @@ public class HistorialService {
         historialActual.setDescuentos(descuento);
         historialActual.setRecargos(recargo);
 
-        Double totalRep = montoTotal(patente, ingreso);
+        Double totalRep = detalleService.montoTotal(patente, ingreso);
         historialActual.setTotalR(totalRep);
 
         Double iva = totalRep * 0.19;
@@ -118,7 +110,7 @@ public class HistorialService {
             estructura.setMotor(actual.getMotor());
             estructura.setFecha_ingreso(elemento.getFechaI());
             estructura.setHora_ingreso(elemento.getHoraI());
-            estructura.setTotal(montoTotal(elemento.getPatente(), elemento.getFechaI()));
+            estructura.setTotal(detalleService.montoTotal(elemento.getPatente(), elemento.getFechaI()));
             estructura.setIva(elemento.getIva());
             estructura.setDescuentos(elemento.getDescuentos());
             estructura.setSubtotal(elemento.getTotalR() + elemento.getRecargos() - elemento.getDescuentos() );
