@@ -32,12 +32,13 @@ spring:
             - Path=/vehiculo/**
 
         - id: reparaciones-service
-          uri: lb://reparaciones-service:8093
+          uri: lb://reparaciones-service:8092
           predicates:
             - Path=/reparaciones/**
-            
+
         - id: reportes-service
-          uri: lb://reportes-service:8094
+          uri: lb://reportes-service:8093
           predicates:
             - Path=/reportes/**
+
         
