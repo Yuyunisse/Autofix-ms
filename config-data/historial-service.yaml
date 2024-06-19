@@ -4,7 +4,7 @@ spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/historialDB
     username: postgres
-    password: moshiluna_1620
+    password: 12345678
 eureka:
   instance:
     hostname: localhost
